@@ -1,0 +1,27 @@
+{
+  "name": "srw-pixlr",
+  "version": "1.0.0",
+  "description": "draw and move pixel images on canvas",
+  "main": "index.js",
+  "scripts": {
+    "build": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/huli1234/srw-pixlr.git"
+  },
+  "keywords": [
+    "canvas",
+    "js",
+    "pixelimage"
+  ],
+  "author": "moritz hulliger",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/huli1234/srw-pixlr/issues"
+  },
+  "homepage": "https://github.com/huli1234/srw-pixlr#readme",
+  "devDependencies": {
+    "webpack": "^1.14.0"
+  }
+}
