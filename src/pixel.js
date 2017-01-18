@@ -3,14 +3,11 @@ export class Pixel {
     constructor(x, y, borderSize,size, color, drawCircles) {
         this.x = x;
         this.y = y;
-        this.oldX = null;
-        this.oldY = null;
         this.target = null;
         this.size = size;
         this.color = color;
         this.drawCircles = drawCircles;
         this.distanceToTarget = 0;
-        this.randomSteps = 0;
         this.borderSize = borderSize;
     }
 

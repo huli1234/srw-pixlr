@@ -23,8 +23,6 @@ export class SeerowReader {
         this.ledMode = false;
         this.duration = 2000;
         this.borderSize = 2;
-
-
         this.targetContext.canvas.width = 640;
         this.targetContext.canvas.height = 640;
     }
