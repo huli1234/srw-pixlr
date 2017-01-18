@@ -1,7 +1,7 @@
 {
   "name": "srw-pixlr",
   "description": "draw and move pixel images on canvas",
-  "main": "dist/main.bundle.js",
+  "main": "dist/srw-pixlr.js",
   "authors": [
     "moritz hulliger"
   ],

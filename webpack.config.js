@@ -6,7 +6,7 @@ module.exports = {
     entry: './srw-rdr.js',
     output: {
         path: path.resolve(__dirname, './dist'),
-        filename: 'srw.pixlr.bundle.min.js'
+        filename: 'srw-pixlr.js'
     },
     module: {
         loaders: [{
