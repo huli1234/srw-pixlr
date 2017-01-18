@@ -1,0 +1,22 @@
+{
+  "name": "srw-pixlr",
+  "description": "draw and move pixel images on canvas",
+  "main": "dist/main.bundle.js",
+  "authors": [
+    "moritz hulliger"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "canvas",
+    "js",
+    "pixelimage"
+  ],
+  "homepage": "https://github.com/huli1234/srw-pixlr",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
