@@ -12,7 +12,10 @@ export class SeerowReader {
         this.resolution = { x : 32, y : 32 };
         this.imageReader = new ImageReader(this.resolution.x * 10, this.resolution.y * 10);
         this.targetCanvas = document.getElementById("srw-pxl-drwr-targetcanvas");
-        this.targetContext = this.targetCanvas.getContext("2d");
+
+        if(this.targetCanvas) {
+            this.targetContext = this.targetCanvas.getContext("2d");
+        }
         this.SPEED = 50;
         this.images = document.getElementsByClassName('srw-img-rdr-src');
         this.backgroundColor = '#2bfeba';
@@ -23,8 +26,6 @@ export class SeerowReader {
         this.ledMode = false;
         this.duration = 2000;
         this.borderSize = 2;
-        this.targetContext.canvas.width = 640;
-        this.targetContext.canvas.height = 640;
     }
     
     /**
@@ -32,6 +33,11 @@ export class SeerowReader {
      * 
      */
     setOptions(options = {}) {
+
+        if(options.width && options.height) {
+            this.targetCanvas.width = options.width;
+            this.targetCanvas.height = options.height;
+        }
 
         if(options.resolution && options.resolution.x &&  options.resolution.y) {
             this.resolution = options.resolution;
@@ -100,7 +106,7 @@ export class SeerowReader {
 
 
         if(!this.ledMode) {
-            this.targetContext.clearRect(0, 0, 640, 640);
+            this.targetContext.clearRect(0, 0, this.targetCanvas.width, this.targetCanvas.height);
             this.fillCanvas();
         }
 
