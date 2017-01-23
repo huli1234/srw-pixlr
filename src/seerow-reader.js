@@ -103,52 +103,62 @@ export class SeerowReader {
     }
 
     draw() {
-
-
-        if(!this.ledMode) {
-            this.targetContext.clearRect(0, 0, this.targetCanvas.width, this.targetCanvas.height);
-            this.fillCanvas();
-        }
-
-
-        this.targetContext.fillStyle = this.pixelColor;
-
-        var targetPixelMap;
-
-        if(this.currentPixelArray.length > 0) {
-            targetPixelMap = this.currentPixelArray
-        }
-
-        if(!targetPixelMap) {
-            var image = this.images[this.currentImageIndex];
-            targetPixelMap = this.imageReader.getPixels(image);
-        }
-
-        var targetPixels = this.imageReader.createPixels(targetPixelMap);
-
-        targetPixels.forEach(pixel => {
-            pixel.size = this.pixelSize();
-            pixel.color = this.pixelColor;
-            pixel.drawCircles = this.drawCircles;
-            pixel.borderSize = this.borderSize;
-        });
-
-        if(this.currentPixels.length > 0) {
-            if(this.ledMode) {
-                this.targetContext.globalAlpha = 0;
-                this.currentPixels.forEach(currentPixel => currentPixel.hide(this.targetContext, this.duration / 2));
-                setTimeout(() => {
-                    this.targetContext.globalAlpha = 1;
-                    targetPixels.forEach(targetPixel => targetPixel.show(this.targetContext, this.duration / 2));
-                }, this.duration / 2 + 200);
-                this.currentPixels = targetPixels;
-            } else {
-                this.mapPixels(targetPixels, this.targetContext);
-                this.movePixels(this.currentPixels, this.targetContext);
+        return new Promise((resolve, reject) => {
+            if(!this.ledMode) {
+                this.targetContext.clearRect(0, 0, this.targetCanvas.width, this.targetCanvas.height);
+                this.fillCanvas();
             }
-        } else {
-            this.drawOnCanvas(targetPixels, this.targetContext);
-        }
+
+            this.targetContext.fillStyle = this.pixelColor;
+
+            var targetPixelMap;
+
+            if(this.currentPixelArray.length > 0) {
+                targetPixelMap = this.currentPixelArray
+            }
+
+            if(!targetPixelMap) {
+                var image = this.images[this.currentImageIndex];
+                targetPixelMap = this.imageReader.getPixels(image);
+            }
+
+            var targetPixels = this.imageReader.createPixels(targetPixelMap);
+
+            targetPixels.forEach(pixel => {
+                pixel.size = this.pixelSize();
+                pixel.color = this.pixelColor;
+                pixel.drawCircles = this.drawCircles;
+                pixel.borderSize = this.borderSize;
+            });
+
+            if(this.currentPixels.length > 0) {
+                if(this.ledMode) {
+                    this.targetContext.globalAlpha = 0;
+                    this.currentPixels.forEach(currentPixel => currentPixel.hide(this.targetContext, this.duration / 2));
+                    setTimeout(() => {
+                        this.targetContext.globalAlpha = 1;
+                        var promises = [];
+                        targetPixels.forEach(targetPixel => {
+                            var promise = new Promise((resolve, reject) => {
+                                targetPixel.show(resolve, this.targetContext, this.duration / 2);
+                            });
+                            promises.push(promise);
+                        });
+
+                        Promise.all(promises).then(() => {
+                            resolve();
+                        });
+                    }, this.duration / 2 + 200);
+                    this.currentPixels = targetPixels;
+                } else {
+                    this.mapPixels(targetPixels, this.targetContext);
+                    this.movePixels(this.currentPixels, this.targetContext);
+                }
+            } else {
+                this.drawOnCanvas(targetPixels, this.targetContext);
+            }
+        })
+
     }
 
     movePixels(pixels, targetContext) {
@@ -164,8 +174,7 @@ export class SeerowReader {
 
             this.isFinished = roundFinished;
             this.targetContext.fillStyle = "rgba(" + this.backgroundColor.r + ","  +  this.backgroundColor.g + "," + this.backgroundColor.b + "," + this.backgroundOpacity + ")";
-       
-       
+
             this.fillCanvas();
 
             pixels.forEach(currentPixel => {          
@@ -239,7 +248,7 @@ export class SeerowReader {
         if(this.currentImageIndex >= this.images.length) {
             this.currentImageIndex = 0;
         }
-        this.draw();
+        return this.draw();
     }
 
     setNewImage(image) {
@@ -248,9 +257,8 @@ export class SeerowReader {
             return new Error("provided array doesnt match resolution of drwr");
         } else {
             this.currentPixelArray = image;
-            this.draw();
+            return this.draw();
         }
-
     }
 
     pixelSize() {

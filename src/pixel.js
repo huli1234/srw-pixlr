@@ -31,16 +31,12 @@ export class Pixel {
         }, randomDuration);
     }
 
-    show(targetContext, duration) {
+    show(resolve, targetContext, duration) {
         var randomDuration = Math.random() * duration;
         setTimeout(() => {
             this.drawOnCanvas(targetContext);
+            resolve();
         }, randomDuration);
-
-    }
-
-    setRandomSteps(maxDistance) {
-        this.randomSteps = maxDistance - this.distanceToTarget;
     }
 
     moveToTarget() {
@@ -56,8 +52,6 @@ export class Pixel {
             this.y = this.y - 1;
         }
     }
-
-
 
     drawOnCanvas(targetContext) {
         targetContext.fillStyle = this.color;
