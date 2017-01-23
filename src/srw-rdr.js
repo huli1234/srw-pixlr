@@ -16,10 +16,10 @@ import { SeerowReader } from './seerow-reader';
             reader.draw();
         };
         SrwPixelDrawer.changeImage = () => {
-            reader.changeImage();
+            return reader.changeImage();
         };
         SrwPixelDrawer.setNewImage = (image) => {
-            reader.setNewImage(image);
+            return reader.setNewImage(image);
         };
         return SrwPixelDrawer;
     }

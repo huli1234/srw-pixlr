@@ -253,12 +253,15 @@ export class SeerowReader {
 
     setNewImage(image) {
 
-        if(image.length != this.resolution.x && image[0].length != this.resolution.y) {
-            return new Error("provided array doesnt match resolution of drwr");
-        } else {
-            this.currentPixelArray = image;
-            return this.draw();
-        }
+        return new Promise((resolve, reject) => {
+            if(image.length != this.resolution.x && image[0].length != this.resolution.y) {
+                reject(new Error("provided array doesnt match resolution of drwr"));
+            } else {
+                this.currentPixelArray = image;
+                this.draw().then(resolve, reject);
+            }
+        })
+
     }
 
     pixelSize() {
