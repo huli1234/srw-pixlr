@@ -93,7 +93,7 @@ export class SeerowReader {
         if(!this.drawCircles) {
             for(var x = 0; x <= this.resolution.x; x++) {
                 for(var y = 0; y <= this.resolution.y; y++) {
-                    this.targetContext.clearRect((this.x * this.size.x) + this.borderSize, (this.y * this.size.y) + this.borderSize, this.size.x - this.borderSize, this.size.y - this.borderSize);
+                    this.targetContext.clearRect((this.x * this.size.x) + this.borderSize / 2, (this.y * this.size.y) + this.borderSize / 2, this.size.x - this.borderSize, this.size.y - this.borderSize);
                 }
             }
         } else if(this.drawCircles) {
