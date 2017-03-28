@@ -1,6 +1,6 @@
 {
   "name": "srw-pixlr",
-  "version": "1.2.2",
+  "version": "1.2.4",
   "description": "draw and move pixel images on canvas",
   "main": "index.js",
   "scripts": {
