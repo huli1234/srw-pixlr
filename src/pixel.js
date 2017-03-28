@@ -57,7 +57,7 @@ export class Pixel {
         targetContext.fillStyle = this.color;
 
         if(!this.drawCircles) {
-            targetContext.fillRect((this.x * this.size.x) + this.borderSize / 2, (this.y * this.size.y) + this.borderSize / 2, this.size.x - this.borderSize, this.size.y - this.borderSize);
+            targetContext.fillRect((this.x * this.size.x) + this.borderSize, (this.y * this.size.y) + this.borderSize, this.size.x - this.borderSize, this.size.y - this.borderSize);
         } else {
             targetContext.beginPath();
             targetContext.arc(this.x * this.size.x, this.y * this.size.y, (this.size.x - 1) / 2, 0, 2 * Math.PI, false);
