@@ -15,14 +15,15 @@ All images with the class "srw-img-rdr-src" are used as source images. These sou
 ```
 
 ## options ##
+**selector** :  any query selector for the canvas that is to be used
 
-**resolution : ** Resolution of the pixel image, needs to be a sqaure at the moment
+**resolution** :  Resolution of the pixel image, needs to be a sqaure at the moment
 
-**speed : ** Animation speed for one step (pixel move 1 pixel)
+**speed** :  Animation speed for one step (pixel move 1 pixel)
 
-**backgroundColor : ** Backgroundcolor of the target image
+**backgroundColor** :  Backgroundcolor of the target image
 
-**pixelColor : ** Color of the pixels
+**pixelColor** :  Color of the pixels
 
 **fill** : fill the target image, defaults to false which draws only the outline
 
