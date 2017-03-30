@@ -5,22 +5,30 @@ import { SeerowReader } from './seerow-reader';
     'use strict';
 
     function define_library() {
-        var SrwPixelDrawer = {};
-        var reader = new SeerowReader();
+        let SrwPixelDrawer = {};
 
-        SrwPixelDrawer.options = (options) => {
+        SrwPixelDrawer.create = options => {
+
+            let instance = {};
+
+            let reader = new SeerowReader();
             reader.setOptions(options);
+
+            instance.options = options => {
+                reader.setOptions(options);
+            };
+            instance.draw = () => {
+                reader.draw();
+            };
+            instance.changeImage = () => {
+                return reader.changeImage();
+            };
+            instance.setNewImage = image => {
+                return reader.setNewImage(image);
+            };
+            return instance;
         };
 
-        SrwPixelDrawer.draw = () => {
-            reader.draw();
-        };
-        SrwPixelDrawer.changeImage = () => {
-            return reader.changeImage();
-        };
-        SrwPixelDrawer.setNewImage = (image) => {
-            return reader.setNewImage(image);
-        };
         return SrwPixelDrawer;
     }
     //define globally if it doesn't already exist

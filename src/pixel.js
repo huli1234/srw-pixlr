@@ -1,6 +1,6 @@
 export class Pixel {
     
-    constructor(x, y, borderSize,size, color, drawCircles) {
+    constructor(x, y, borderSize, size, color, drawCircles) {
         this.x = x;
         this.y = y;
         this.target = null;
@@ -25,14 +25,19 @@ export class Pixel {
     }
 
     hide(targetContext, duration) {
-        var randomDuration = Math.random() * duration;
-        setTimeout(() => {
-            targetContext.clearRect((this.x * this.size.x) + this.borderSize / 2, (this.y * this.size.y) + this.borderSize / 2, this.size.x - this.borderSize, this.size.y - this.borderSize);
-        }, randomDuration);
+        return new Promise((resolve, reject) => {
+            let randomDuration = Math.random() * duration;
+            setTimeout(() => {
+                console.log(targetContext);
+                targetContext.clearRect((this.x * this.size.x) + this.borderSize / 2, (this.y * this.size.y) + this.borderSize / 2, this.size.x - this.borderSize, this.size.y - this.borderSize);
+                resolve();
+            }, randomDuration);
+        })
+
     }
 
     show(resolve, targetContext, duration) {
-        var randomDuration = Math.random() * duration;
+        let randomDuration = Math.random() * duration;
         setTimeout(() => {
             this.drawOnCanvas(targetContext);
             resolve();
@@ -55,8 +60,10 @@ export class Pixel {
 
     drawOnCanvas(targetContext) {
         targetContext.fillStyle = this.color;
-
+        console.log("PIXEL DRAW ON CANVAS", this.color, this.drawCircles);
+        console.log(targetContext);
         if(!this.drawCircles) {
+            console.log("actualy drawing", this.x, this.size, this.y);
             targetContext.fillRect((this.x * this.size.x) + this.borderSize / 2, (this.y * this.size.y) + this.borderSize / 2, this.size.x - this.borderSize, this.size.y - this.borderSize);
         } else {
             targetContext.beginPath();

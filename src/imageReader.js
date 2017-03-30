@@ -30,18 +30,18 @@ export class ImageReader {
         this.context.clearRect(0, 0, this.resolution.x * 10, this.resolution.y * 10);
         image.crossOrigin = "Anonymous";
         this.context.drawImage(image, 0, 0, this.resolution.x, this.resolution.y);
-        var imageData = this.context.getImageData(0, 0, this.resolution.x, this.resolution.y);
-        var pixels = new Array();
-        var newPixels = new Array();
+        const imageData = this.context.getImageData(0, 0, this.resolution.x, this.resolution.y);
+        let pixels = [];
+        let newPixels = [];
 
-        for(var i = 0; i <= this.resolution.x; i++) {
+        for(let i = 0; i <= this.resolution.x; i++) {
             pixels.push([]);
         }
-        for(var i = 0; i <= this.resolution.y; i++) {
+        for(let i = 0; i <= this.resolution.y; i++) {
             newPixels.push([]);
         }
 
-        for (var i=0; i < imageData.data.length; i += 4) {
+        for (let i=0; i < imageData.data.length; i += 4) {
 
             let y = Math.floor(i / (4 * this.resolution.y));
             let x = 0;
@@ -58,16 +58,14 @@ export class ImageReader {
                 pixels[x][y] = 0;
             }
         }
-
-
         return pixels
     }
 
     createPixels(pixels) {
 
-        var imagePixels = new Array();
-        for(var x = 0; x < pixels.length; x++) {
-            for(var y = 0; y < pixels[x].length; y++) {
+        let imagePixels = [];
+        for(let x = 0; x < pixels.length; x++) {
+            for(let y = 0; y < pixels[x].length; y++) {
                 if(!this.fill) {
                     if(x + 2 >= pixels.length) {
                         newPixels[x][y] = 0;
