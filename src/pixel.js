@@ -28,7 +28,6 @@ export class Pixel {
         return new Promise((resolve, reject) => {
             let randomDuration = Math.random() * duration;
             setTimeout(() => {
-                console.log(targetContext);
                 targetContext.clearRect((this.x * this.size.x) + this.borderSize / 2, (this.y * this.size.y) + this.borderSize / 2, this.size.x - this.borderSize, this.size.y - this.borderSize);
                 resolve();
             }, randomDuration);
@@ -60,10 +59,7 @@ export class Pixel {
 
     drawOnCanvas(targetContext) {
         targetContext.fillStyle = this.color;
-        console.log("PIXEL DRAW ON CANVAS", this.color, this.drawCircles);
-        console.log(targetContext);
         if(!this.drawCircles) {
-            console.log("actualy drawing", this.x, this.size, this.y);
             targetContext.fillRect((this.x * this.size.x) + this.borderSize / 2, (this.y * this.size.y) + this.borderSize / 2, this.size.x - this.borderSize, this.size.y - this.borderSize);
         } else {
             targetContext.beginPath();

@@ -147,7 +147,6 @@ export class SeerowReader {
                 pixel.drawCircles = this.drawCircles;
                 pixel.borderSize = this.borderSize;
             });
-            console.log(this.currentPixels, this.ledMode);
             if(this.currentPixels.length > 0) {
                 if(this.ledMode) {
                     let drawings = [];
