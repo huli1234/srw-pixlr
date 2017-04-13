@@ -154,6 +154,7 @@ export class SeerowReader {
                         drawings.push(this.drawLed(ctx, targetPixels));
                     });
                     Promise.all(drawings).then(() => {
+                        this.currentPixels = targetPixels;
                         resolve();
                     }).catch();
                 } else {
@@ -180,6 +181,7 @@ export class SeerowReader {
             });
 
             Promise.all(hidePixels).then(() => {
+                console.log("hidden all pixels");
                 context.globalAlpha = 1;
                 let showPixels = [];
                 targetPixels.forEach(targetPixel => {
