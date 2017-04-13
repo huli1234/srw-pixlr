@@ -10,7 +10,7 @@ export class SeerowReader {
         this.currentPixelArray = [];
         this.isFinished = false;
         this.resolution = { x : 32, y : 32 };
-        this.imageReader = new ImageReader(this.resolution.x * 10, this.resolution.y * 10);
+        this.imageReader;
         this.targetCanvasList = document.querySelectorAll("srw-pxl-drwr-targetcanvas");
         this.targetContextList = [];
 
@@ -85,6 +85,7 @@ export class SeerowReader {
 
         if(options.ledMode) {
             this.ledMode = options.ledMode;
+            if(!this.ledMode) this.imageReader = new ImageReader(this.resolution.x * 10, this.resolution.y * 10);
         }
 
         if(options.borderSize) {

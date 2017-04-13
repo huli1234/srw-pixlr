@@ -5,6 +5,7 @@ import { SeerowReader } from './seerow-reader';
     'use strict';
 
     function define_library() {
+
         let SrwPixelDrawer = {};
 
         SrwPixelDrawer.create = options => {

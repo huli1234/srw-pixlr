@@ -1,6 +1,6 @@
 {
   "name": "srw-pixlr",
-  "version": "1.3.3",
+  "version": "1.3.4",
   "description": "draw and move pixel images on canvas",
   "main": "index.js",
   "scripts": {
@@ -27,5 +27,8 @@
     "babel-preset-es2015": "^6.24.0",
     "path": "^0.12.7",
     "webpack": "^2.2.0"
+  },
+  "dependencies": {
+    "native-promise-only": "^0.8.1"
   }
 }
