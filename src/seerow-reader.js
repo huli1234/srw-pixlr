@@ -182,7 +182,6 @@ export class SeerowReader {
             });
 
             Promise.all(hidePixels).then(() => {
-                console.log("hidden all pixels");
                 context.globalAlpha = 1;
                 let showPixels = [];
                 targetPixels.forEach(targetPixel => {
