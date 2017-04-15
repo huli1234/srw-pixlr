@@ -60,37 +60,4 @@ export class ImageReader {
         }
         return pixels
     }
-
-    createPixels(pixels) {
-
-        let imagePixels = [];
-        for(let x = 0; x < pixels.length; x++) {
-            for(let y = 0; y < pixels[x].length; y++) {
-                if(!this.fill) {
-                    if(x + 2 >= pixels.length) {
-                        newPixels[x][y] = 0;
-                    } else if(x === 0) {
-                        newPixels[x][y] = 0;
-                    } else if(y === 0) {
-                        newPixels[x][y] = 0;
-                    } else if(y + 2 >= pixels[x].length ) {
-                        newPixels[x][y] = 0;
-                    } else if(pixels[x][y] === 1 &&
-                        (pixels[x - 1][y] === 0 ||
-                        pixels[x + 1][y] === 0||
-                        pixels[x][y + 1] === 0||
-                        pixels[x][y - 1] === 0)) {
-                        var newPixel = new Pixel(x, y);
-                        imagePixels.push(newPixel);
-                    } else {
-                        newPixels[x][y] = 0;
-                    }
-                } else if(pixels[x][y] === 1) {
-                    var newPixel = new Pixel(x, y);
-                    imagePixels.push(newPixel);
-                }
-            }
-        }
-        return imagePixels;
-    }
 }

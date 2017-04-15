@@ -96,7 +96,9 @@ export class SeerowReader {
             this.duration = options.duration;
         }
 
-        this.imageReader.setOptions(options);
+        if(this.imageReader) {
+            this.imageReader.setOptions(options);
+        }
     }
 
     /**
@@ -140,7 +142,7 @@ export class SeerowReader {
                 targetPixelMap = this.imageReader.getPixels(image);
             }
 
-            let targetPixels = this.imageReader.createPixels(targetPixelMap);
+            let targetPixels = this.createPixels(targetPixelMap);
 
             targetPixels.forEach(pixel => {
                 pixel.size = this.pixelSize();
@@ -326,4 +328,40 @@ export class SeerowReader {
     }
 
 
+    /**
+     * from an array of 1's and 0's create a new Array of Pixels
+     *
+     * @param pixels
+     * @returns {Array}
+     */
+    createPixels(pixels) {
+
+        let imagePixels = [];
+        for(let x = 0; x < pixels.length; x++) {
+            for(let y = 0; y < pixels[x].length; y++) {
+                if(!this.fill) {
+                    if(x + 2 >= pixels.length) {
+                        newPixels[x][y] = 0;
+                    } else if(x === 0) {
+                        newPixels[x][y] = 0;
+                    } else if(y === 0) {
+                        newPixels[x][y] = 0;
+                    } else if(y + 2 >= pixels[x].length ) {
+                        newPixels[x][y] = 0;
+                    } else if(pixels[x][y] === 1 &&
+                        (pixels[x - 1][y] === 0 ||
+                        pixels[x + 1][y] === 0||
+                        pixels[x][y + 1] === 0||
+                        pixels[x][y - 1] === 0)) {
+                        imagePixels.push(new Pixel(x, y));
+                    } else {
+                        newPixels[x][y] = 0;
+                    }
+                } else if(pixels[x][y] === 1) {
+                    imagePixels.push(new Pixel(x, y));
+                }
+            }
+        }
+        return imagePixels;
+    }
 }
