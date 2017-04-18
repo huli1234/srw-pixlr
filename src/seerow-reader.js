@@ -159,7 +159,7 @@ export class SeerowReader {
                     Promise.all(drawings).then(() => {
                         this.currentPixels = targetPixels;
                         resolve();
-                    }).catch();
+                    });
                 } else {
                     this.mapPixels(targetPixels, this.targetContextList);
                     this.movePixels(this.currentPixels, this.targetContextList).then(() => {
